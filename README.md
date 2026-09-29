@@ -25,14 +25,38 @@ mise plugin install lmod https://github.com/underwoo/mise-env-lmod
 To pin a release, append the tag:
 
 ```sh
-mise plugin install lmod https://github.com/underwoo/mise-env-lmod#v0.1.0
+mise plugin install lmod https://github.com/underwoo/mise-env-lmod#v0.1.1
 ```
+
+> [!IMPORTANT]
+> Install the plugin *before* entering a directory whose config uses it.
+> mise does not auto-install environment plugins, and while a config
+> references a missing env plugin every mise command in that directory
+> fails, including `mise plugin install`. If you're already in such a
+> directory, run the install relative to another directory:
+>
+> ```sh
+> mise --cd ~ plugin install lmod https://github.com/underwoo/mise-env-lmod
+> ```
 
 ## Usage
 
 In the project's `mise.toml` (or `.mise.toml`):
 
 ```toml
+[env]
+_.lmod = { modules = ["cray-hdf5", "cray-netcdf"] }
+```
+
+Adding the plugin's source under `[plugins]` is recommended. It tells
+people (and mise) where the plugin comes from: without it, a missing plugin
+fails with the unhelpful error `relative URL without a base`; with it, mise
+reports `[lmod] plugin not installed` along with the repository URL.
+
+```toml
+[plugins]
+lmod = "https://github.com/underwoo/mise-env-lmod"
+
 [env]
 _.lmod = { modules = ["cray-hdf5", "cray-netcdf"] }
 ```

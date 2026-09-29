@@ -5,7 +5,7 @@ PLUGIN = {
     name = "lmod",
 
     --- Plugin version (required)
-    version = "0.1.0",
+    version = "0.1.1",
 
     --- Plugin description (optional)
     description = "Load Lmod modules into a mise environment",
