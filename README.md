@@ -115,7 +115,15 @@ message is shown as a mise warning and no changes are applied.
 ## Updating
 
 ```sh
+mise plugin ls --outdated   # check for a newer version
 mise plugin update lmod
+```
+
+An install pinned to a tag stays on that tag when updated. To move it to a
+newer release, name the tag:
+
+```sh
+mise plugin update lmod#v0.1.1
 ```
 
 ## Development
